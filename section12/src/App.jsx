@@ -7,6 +7,9 @@ import NotFound from "./pages/NotFound";
 import { useNavigate } from 'react-router-dom';
 import Edit from './pages/Edit';
 
+import Header from './components/Header';
+import Button from './components/Button';
+
 // 1. "/" : 모든 일기 조회하는 Home
 // 2. "/new": 새로운 일기 작성하는 New 페이지 
 // 3. "/diary": 일기를 상세히 조회하는 Diary
@@ -19,14 +22,14 @@ function App() {
 
   return (
     <>
-      <div>
-        <Link to={"/"}>Home</Link>
-        <Link to={"/new"}>New</Link>
-        <Link to={"/diary"}>Diary</Link>
-      </div>
-      <div>
-        <button onClick={onClickButton}>New 페이지로 이동</button>
-      </div>
+      <Header 
+        title="Header"
+        leftChild={<Button text="left" />}
+        rightChild={<Button text="right" />}
+      />
+      <Button text="버튼" />
+      <Button type="POSITIVE" text="긍정" />
+      <Button type="NEGATIVE" text="부정" />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/new" element={<New />} />
