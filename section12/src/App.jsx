@@ -7,21 +7,27 @@ import NotFound from "./pages/NotFound";
 import Edit from './pages/Edit';
 import { createContext, useReducer, useRef } from 'react';
 
-const DiaryStateContext = createContext();
-const DiaryDispatchContext = createContext();
+export const DiaryStateContext = createContext();
+export const DiaryDispatchContext = createContext();
 
 const mockData = [
   {
     id: 1,
-    createdDate: new Date().getTime(),
+    createdDate: new Date("2025-04-29").getTime(),
     emotionId: 1,
     content: "1번 일기 내용"
   },
   {
     id: 2,
-    createdDate: new Date().getTime(),
+    createdDate: new Date("2025-04-30").getTime(),
     emotionId: 2,
     content: "2번 일기 내용"
+  },
+  {
+    id: 3,
+    createdDate: new Date("2025-03-20").getTime(),
+    emotionId: 3,
+    content: "3번 일기 내용"
   },
 ];
 
@@ -36,7 +42,7 @@ const reducer = (state, action) => {
 
 function App() {
   const [data, dispatch] = useReducer(reducer, mockData);
-  const idRef = useRef(3);
+  const idRef = useRef(4);
 
   const onCreate = (createDate, emotionId, content) => {
     dispatch({ type: "CREATE", data: { id: idRef.current++, createDate, emotionId, content } });
