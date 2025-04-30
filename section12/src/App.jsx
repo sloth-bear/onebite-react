@@ -44,12 +44,12 @@ function App() {
   const [data, dispatch] = useReducer(reducer, mockData);
   const idRef = useRef(4);
 
-  const onCreate = (createDate, emotionId, content) => {
-    dispatch({ type: "CREATE", data: { id: idRef.current++, createDate, emotionId, content } });
+  const onCreate = (createdDate, emotionId, content) => {
+    dispatch({ type: "CREATE", data: { id: idRef.current++, createdDate, emotionId, content } });
   }
 
-  const onUpdate = (id, createDate, emotionId, content) => {
-    dispatch({ type: "UPDATE", data: { id, createDate, emotionId, content } });
+  const onUpdate = (id, createdDate, emotionId, content) => {
+    dispatch({ type: "UPDATE", data: { id, createdDate, emotionId, content } });
   }
 
   const onDelete = (id) => {
