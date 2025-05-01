@@ -1,30 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./Button";
 import "./Editor.css";
 import EmotionItem from "./EmotionItem";
 import { useNavigate } from "react-router-dom";
+import { emotions } from "../util/constants";
+import { formatDate } from "../util/dateFormatter";
 
-const emotions = [
-  { id: 1, name: "완전 좋음", },
-  { id: 2, name: "좋음", },
-  { id: 3, name: "그럭저럭", },
-  { id: 4, name: "나쁨", },
-  { id: 5, name: "끔찍함", },
-];
-
-const formatDate = (targetDate) => {
-  const month = targetDate.getMonth() + 1;
-  const day = targetDate.getDate();
-  return `${targetDate.getFullYear()}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`
-}
-
-const Editor = ({ onSubmit }) => {
+const Editor = ({ initData, onSubmit }) => {
   const navi = useNavigate();
   const [input, setInput] = useState({
     createdDate: new Date(), 
     emotionId: 3, 
     content: ""
   });
+
+  useEffect(() => {
+    if (initData) {
+      setInput({ ...initData, createdDate: new Date(Number(initData.createdDate)) });
+    }
+  }, [initData]);
 
   const onChangeInput = (e) => {
     const name = e.target.name;
@@ -69,7 +63,7 @@ const Editor = ({ onSubmit }) => {
     </section>
     <section className="content_section">
       <h4>오늘의 일기</h4>
-      <textarea name="content" placeholder="오늘은 어땠나요?" onChange={onChangeInput} />
+      <textarea name="content" value={input.content} placeholder="오늘은 어땠나요?" onChange={onChangeInput} />
     </section>
     <section className="button_section">
       <Button text={"취소하기"} onClick={onClickCancel} />
